@@ -1,0 +1,16 @@
+[workspace]
+members = ["packages/*"]
+resolver = "2"
+
+[workspace.package]
+authors = ["Rust For Web <info@rustforweb.org>"]
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/RustForWeb/yew-macros"
+version = "0.1.0"
+
+[workspace.dependencies]
+yew = "0.21.0"
+
+[patch.crates-io]
+yew = { git = "https://github.com/RustForWeb/yew.git", branch = "feature/use-composed-ref" }

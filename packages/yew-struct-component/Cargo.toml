@@ -1,0 +1,13 @@
+[package]
+name = "yew-struct-component"
+description = "Define Yew components using structs."
+
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+version.workspace = true
+
+[dependencies]
+yew.workspace = true
+yew-struct-component-macro = { path = "../yew-struct-component-macro", version = "0.1.0" }
