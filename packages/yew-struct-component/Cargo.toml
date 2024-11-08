@@ -10,4 +10,4 @@ version.workspace = true
 
 [dependencies]
 yew.workspace = true
-yew-struct-component-macro = { path = "../yew-struct-component-macro", version = "0.0.4" }
+yew-struct-component-macro = { path = "../yew-struct-component-macro", version = "0.0.5" }
