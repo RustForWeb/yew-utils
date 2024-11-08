@@ -156,7 +156,7 @@ pub fn derive_struct_component(input: proc_macro::TokenStream) -> proc_macro::To
 
                 if ident == "value" {
                     attribute_value = Some(quote! {
-                        tag.set_value(self.value);
+                        tag.set_value(self.value.clone());
                     });
                 }
 
