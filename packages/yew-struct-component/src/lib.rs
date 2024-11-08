@@ -5,6 +5,7 @@ use std::{collections::HashMap, ops::Deref};
 use yew::{html::IntoPropValue, AttrValue};
 pub use yew_struct_component_macro::*;
 
+#[derive(Clone, Debug, PartialEq)]
 pub struct Attributes(HashMap<AttrValue, AttrValue>);
 
 impl Deref for Attributes {
