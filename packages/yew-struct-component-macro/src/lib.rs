@@ -13,16 +13,14 @@ use syn::{
 struct StructComponentAttrArgs {
     tag: Option<String>,
     dynamic_tag: Option<bool>,
+    no_children: Option<bool>,
 }
 
 fn parse_struct_component_attr(attr: &Attribute) -> Result<StructComponentAttrArgs, syn::Error> {
     if !matches!(attr.style, AttrStyle::Outer) {
         Err(syn::Error::new(attr.span(), "not an inner attribute"))
     } else if let Meta::List(list) = &attr.meta {
-        let mut args = StructComponentAttrArgs {
-            tag: None,
-            dynamic_tag: None,
-        };
+        let mut args = StructComponentAttrArgs::default();
 
         list.parse_nested_meta(|meta| {
             if meta.path.is_ident("tag") {
@@ -35,6 +33,12 @@ fn parse_struct_component_attr(attr: &Attribute) -> Result<StructComponentAttrAr
                 let value = meta.value().and_then(|value| value.parse::<LitBool>())?;
 
                 args.dynamic_tag = Some(value.value());
+
+                Ok(())
+            } else if meta.path.is_ident("no_children") {
+                let value = meta.value().and_then(|value| value.parse::<LitBool>())?;
+
+                args.no_children = Some(value.value());
 
                 Ok(())
             } else {
@@ -218,9 +222,19 @@ pub fn derive_struct_component(input: proc_macro::TokenStream) -> proc_macro::To
                     .into();
         };
 
+        let arguments = if args.no_children.unwrap_or(false) {
+            quote! {
+                self
+            }
+        } else {
+            quote! {
+                self, children: ::yew::prelude::Html
+            }
+        };
+
         quote! {
             impl #ident {
-                pub fn render(self, children: ::yew::prelude::Html) -> ::yew::prelude::Html {
+                pub fn render(#arguments) -> ::yew::prelude::Html {
                     let mut tag = ::yew::virtual_dom::VTag::new(#tag);
                     #node_ref
 
