@@ -244,6 +244,8 @@ pub fn derive_struct_component(input: proc_macro::TokenStream) -> proc_macro::To
                     let mut tag = ::yew::virtual_dom::VTag::new(#tag);
                     #node_ref
 
+                    #attribute_checked
+                    #attribute_value
                     tag.set_attributes(::yew::virtual_dom::Attributes::IndexMap(
                         ::std::rc::Rc::new(
                             [
@@ -255,9 +257,6 @@ pub fn derive_struct_component(input: proc_macro::TokenStream) -> proc_macro::To
                             .collect(),
                         ),
                     ));
-
-                    #attribute_checked
-                    #attribute_value
 
                     tag.set_listeners(::std::boxed::Box::new([
                         #(::yew::html::#listeners::Wrapper::__macro_new(
