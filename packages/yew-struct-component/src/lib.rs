@@ -1,6 +1,12 @@
 //! Define [Yew](https://yew.rs/) components using structs.
 
-use std::{collections::HashMap, ops::Deref};
+use std::{
+    collections::{
+        hash_map::{IntoIter, Iter, IterMut},
+        HashMap,
+    },
+    ops::Deref,
+};
 
 use yew::{html::IntoPropValue, AttrValue};
 pub use yew_struct_component_macro::*;
@@ -13,6 +19,33 @@ impl Deref for Attributes {
 
     fn deref(&self) -> &Self::Target {
         &self.0
+    }
+}
+
+impl<'a> IntoIterator for &'a Attributes {
+    type Item = (&'a AttrValue, &'a Option<AttrValue>);
+    type IntoIter = Iter<'a, AttrValue, Option<AttrValue>>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.0.iter()
+    }
+}
+
+impl<'a> IntoIterator for &'a mut Attributes {
+    type Item = (&'a AttrValue, &'a mut Option<AttrValue>);
+    type IntoIter = IterMut<'a, AttrValue, Option<AttrValue>>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.0.iter_mut()
+    }
+}
+
+impl IntoIterator for Attributes {
+    type Item = (AttrValue, Option<AttrValue>);
+    type IntoIter = IntoIter<AttrValue, Option<AttrValue>>;
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.0.into_iter()
     }
 }
 
