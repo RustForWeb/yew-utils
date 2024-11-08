@@ -232,6 +232,12 @@ pub fn derive_struct_component(input: proc_macro::TokenStream) -> proc_macro::To
             }
         };
 
+        let children = (!args.no_children.unwrap_or(false)).then(|| {
+            quote! {
+                tag.add_child(children);
+            }
+        });
+
         quote! {
             impl #ident {
                 pub fn render(#arguments) -> ::yew::prelude::Html {
@@ -259,7 +265,7 @@ pub fn derive_struct_component(input: proc_macro::TokenStream) -> proc_macro::To
                         ),)*
                     ]));
 
-                    tag.add_child(children);
+                    #children
 
                     tag.into()
                 }
