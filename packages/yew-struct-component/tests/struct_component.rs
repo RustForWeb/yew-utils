@@ -39,7 +39,7 @@ pub struct BoxProps {
     #[prop_or_default]
     pub node_ref: NodeRef,
     #[prop_or_default]
-    pub attributes: Option<Attributes>,
+    pub attributes: Attributes,
     #[prop_or_default]
     pub as_child: Option<Callback<BoxChildProps, Html>>,
     #[prop_or_default]
@@ -51,7 +51,7 @@ pub struct BoxChildProps {
     #[struct_component(dynamic_tag = true)]
     pub r#as: BoxAs,
     pub node_ref: NodeRef,
-    pub attributes: Option<Attributes>,
+    pub attributes: Attributes,
     pub id: Option<String>,
     pub class: Option<String>,
     pub style: Option<String>,
@@ -88,7 +88,7 @@ pub struct ImageProps {
     #[prop_or_default]
     pub node_ref: NodeRef,
     #[prop_or_default]
-    pub attributes: Option<Attributes>,
+    pub attributes: Attributes,
     #[prop_or_default]
     pub as_child: Option<Callback<ImageChildProps, Html>>,
 }
@@ -97,7 +97,7 @@ pub struct ImageProps {
 #[struct_component(tag = "img", no_children = true)]
 pub struct ImageChildProps {
     pub node_ref: NodeRef,
-    pub attributes: Option<Attributes>,
+    pub attributes: Attributes,
     pub id: Option<String>,
     pub class: Option<String>,
     pub style: Option<String>,
@@ -117,5 +117,18 @@ pub fn Image(props: &ImageProps) -> Html {
         as_child.emit(child_props)
     } else {
         child_props.render()
+    }
+}
+
+#[function_component]
+pub fn App() -> Html {
+    html! {
+        <Box>
+            <Image
+                attributes={[
+                    ("src", "https://picsum.photos/id/10/200/300")
+                ]}
+            />
+        </Box>
     }
 }
