@@ -1203,7 +1203,7 @@ dependencies = [
 
 [[package]]
 name = "yew-struct-component"
-version = "0.0.9"
+version = "0.0.10"
 dependencies = [
  "yew",
  "yew-struct-component-macro",
@@ -1211,7 +1211,7 @@ dependencies = [
 
 [[package]]
 name = "yew-struct-component-macro"
-version = "0.0.9"
+version = "0.0.10"
 dependencies = [
  "proc-macro2",
  "quote",
