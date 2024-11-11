@@ -107,7 +107,7 @@ pub struct ImageChildProps {
 pub fn Image(props: &ImageProps) -> Html {
     let child_props = ImageChildProps {
         node_ref: props.node_ref.clone(),
-        attributes: props.attributes.clone(),
+        attributes: props.attributes.clone().with_defaults([("alt", "Image")]),
         id: props.id.clone(),
         class: props.class.clone(),
         style: props.style.clone(),
