@@ -52,8 +52,10 @@ pub struct BoxChildProps {
     pub r#as: BoxAs,
     pub node_ref: NodeRef,
     pub attributes: Attributes,
-    pub id: Option<String>,
+
+    // Global attributes
     pub class: Option<String>,
+    pub id: Option<String>,
     pub style: Option<String>,
 }
 
@@ -63,8 +65,10 @@ pub fn Box(props: &BoxProps) -> Html {
         r#as: props.r#as,
         node_ref: props.node_ref.clone(),
         attributes: props.attributes.clone(),
-        id: props.id.clone(),
+
+        // Global attributes
         class: props.class.clone(),
+        id: props.id.clone(),
         style: props.style.clone(),
     };
 
@@ -79,9 +83,9 @@ pub fn Box(props: &BoxProps) -> Html {
 pub struct ImageProps {
     // Global attributes
     #[prop_or_default]
-    pub id: Option<String>,
-    #[prop_or_default]
     pub class: Option<String>,
+    #[prop_or_default]
+    pub id: Option<String>,
     #[prop_or_default]
     pub style: Option<String>,
 
@@ -98,8 +102,10 @@ pub struct ImageProps {
 pub struct ImageChildProps {
     pub node_ref: NodeRef,
     pub attributes: Attributes,
-    pub id: Option<String>,
+
+    // Global attributes
     pub class: Option<String>,
+    pub id: Option<String>,
     pub style: Option<String>,
 }
 
@@ -108,8 +114,10 @@ pub fn Image(props: &ImageProps) -> Html {
     let child_props = ImageChildProps {
         node_ref: props.node_ref.clone(),
         attributes: props.attributes.clone().with_defaults([("alt", "Image")]),
-        id: props.id.clone(),
+
+        // Global attributes
         class: props.class.clone(),
+        id: props.id.clone(),
         style: props.style.clone(),
     };
 
