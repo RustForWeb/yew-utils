@@ -1,8 +1,8 @@
 {
-    "name": "@rustforweb/yew-macros",
-    "description": "Macros for Yew.",
+    "name": "@rustforweb/yew-utils",
+    "description": "Utilities for Yew.",
     "author": "Rust For Web <info@rustforweb.org>",
-    "repository": "github:RustForWeb/yew-macros",
+    "repository": "github:RustForWeb/yew-utils",
     "license": "MIT",
     "private": true,
     "scripts": {},
