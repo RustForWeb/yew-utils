@@ -1,0 +1,13 @@
+[package]
+name = "yew-style"
+description = "Style for Yew components."
+
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+version.workspace = true
+
+[dependencies]
+indexmap = "2.6.0"
+yew.workspace = true

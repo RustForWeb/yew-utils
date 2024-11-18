@@ -1,9 +1,6 @@
-# Yew Utils
+# Yew Struct Component Macro
 
-Utilities for [Yew](https://yew.rs/).
-
--   [Yew Struct Component](./packages/yew-struct-component)
--   [Yew Style](./packages/yew-style)
+Define [Yew](https://yew.rs/) components using structs.
 
 ## Documentation
 
@@ -11,14 +8,9 @@ Documentation for the crates is available on [Docs.rs](https://docs.rs/):
 
 -   [`yew-struct-component`](https://docs.rs/yew-struct-component/latest/yew_struct_component/)
 -   [`yew-struct-component-macro`](https://docs.rs/yew-struct-component-macro/latest/yew_struct_component_macro/)
--   [`yew-style`](https://docs.rs/yew-style/latest/yew_style/)
-
-## License
-
-This project is available under the [MIT license](LICENSE.md).
 
 ## Rust For Web
 
-The Yew Utils project is part of the [Rust For Web](https://github.com/RustForWeb).
+The Yew Struct Component project is part of the [Rust For Web](https://github.com/RustForWeb).
 
 [Rust For Web](https://github.com/RustForWeb) creates and ports web UI libraries for Rust. All projects are free and open source.

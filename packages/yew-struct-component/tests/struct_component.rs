@@ -4,9 +4,10 @@ use yew::prelude::*;
 use yew_struct_component::{struct_component, Attributes, StructComponent};
 
 #[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
-pub enum BoxAs {
+enum BoxAs {
     #[default]
     Div,
+    #[allow(unused)]
     Span,
 }
 
@@ -24,7 +25,7 @@ impl Display for BoxAs {
 }
 
 #[derive(PartialEq, Properties)]
-pub struct BoxProps {
+struct BoxProps {
     #[prop_or_default]
     pub r#as: BoxAs,
 
@@ -47,7 +48,7 @@ pub struct BoxProps {
 }
 
 #[derive(Clone, PartialEq, StructComponent)]
-pub struct BoxChildProps {
+struct BoxChildProps {
     #[struct_component(dynamic_tag = true)]
     pub r#as: BoxAs,
     pub node_ref: NodeRef,
@@ -60,7 +61,7 @@ pub struct BoxChildProps {
 }
 
 #[function_component]
-pub fn Box(props: &BoxProps) -> Html {
+fn Box(props: &BoxProps) -> Html {
     let child_props = BoxChildProps {
         r#as: props.r#as,
         node_ref: props.node_ref.clone(),
@@ -80,7 +81,7 @@ pub fn Box(props: &BoxProps) -> Html {
 }
 
 #[derive(PartialEq, Properties)]
-pub struct ImageProps {
+struct ImageProps {
     // Global attributes
     #[prop_or_default]
     pub class: Option<String>,
@@ -99,7 +100,7 @@ pub struct ImageProps {
 
 #[derive(Clone, PartialEq, StructComponent)]
 #[struct_component(tag = "img", no_children = true)]
-pub struct ImageChildProps {
+struct ImageChildProps {
     pub node_ref: NodeRef,
     pub attributes: Attributes,
 
@@ -110,7 +111,7 @@ pub struct ImageChildProps {
 }
 
 #[function_component]
-pub fn Image(props: &ImageProps) -> Html {
+fn Image(props: &ImageProps) -> Html {
     let child_props = ImageChildProps {
         node_ref: props.node_ref.clone(),
         attributes: props.attributes.clone().with_defaults([("alt", "Image")]),
@@ -129,7 +130,7 @@ pub fn Image(props: &ImageProps) -> Html {
 }
 
 #[function_component]
-pub fn App() -> Html {
+fn App() -> Html {
     html! {
         <Box>
             <Image

@@ -1217,3 +1217,11 @@ dependencies = [
  "quote",
  "syn 2.0.87",
 ]
+
+[[package]]
+name = "yew-style"
+version = "0.0.10"
+dependencies = [
+ "indexmap",
+ "yew",
+]
