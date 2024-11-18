@@ -347,5 +347,23 @@ mod tests {
             Style::from([("color", "red")]),
             Style::from([("color", "red")]).with_defaults([("color", "blue")]),
         );
+
+        // Optional in structured
+        assert_eq!(
+            Style::from([("color", Some("red"))]),
+            Style::from([("color", Some("red"))]).with_defaults([("color", Some("blue"))]),
+        );
+        assert_eq!(
+            Style::from([("color", None::<String>)]),
+            Style::from([("color", None::<String>)]).with_defaults([("color", Some("blue"))]),
+        );
+        assert_eq!(
+            Style::from([("color", Some("red"))]),
+            Style::from([("color", Some("red"))]).with_defaults([("color", None::<String>)]),
+        );
+        assert_eq!(
+            Style::from([("color", None::<String>)]),
+            Style::from([("color", None::<String>)]).with_defaults([("color", None::<String>)]),
+        );
     }
 }
