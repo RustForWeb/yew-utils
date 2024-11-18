@@ -181,6 +181,30 @@ impl<const N: usize> From<[(String, String); N]> for Style {
     }
 }
 
+impl IntoPropValue<Style> for Option<&str> {
+    fn into_prop_value(self) -> Style {
+        self.into()
+    }
+}
+
+impl IntoPropValue<Style> for Option<String> {
+    fn into_prop_value(self) -> Style {
+        self.into()
+    }
+}
+
+impl IntoPropValue<Style> for &str {
+    fn into_prop_value(self) -> Style {
+        self.into()
+    }
+}
+
+impl IntoPropValue<Style> for String {
+    fn into_prop_value(self) -> Style {
+        self.into()
+    }
+}
+
 impl IntoPropValue<Style> for IndexMap<String, Option<String>> {
     fn into_prop_value(self) -> Style {
         self.into()
