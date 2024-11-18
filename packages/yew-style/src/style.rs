@@ -1,7 +1,10 @@
-use std::fmt::{self, Display};
+use std::{
+    fmt::{self, Display},
+    ops::Deref,
+};
 
 use indexmap::IndexMap;
-use yew::html::IntoPropValue;
+use yew::{html::IntoPropValue, AttrValue};
 
 fn style_map_to_string(map: &IndexMap<String, Option<String>>) -> String {
     map.iter()
@@ -54,6 +57,10 @@ impl Display for InnerStyle {
 pub struct Style(pub Option<InnerStyle>);
 
 impl Style {
+    pub fn new() -> Self {
+        Self::default()
+    }
+
     pub fn with_defaults<I: Into<Self>>(self, defaults: I) -> Self {
         let defaults: Self = defaults.into();
 
@@ -63,6 +70,14 @@ impl Style {
             (None, Some(defaults)) => Some(defaults),
             (None, None) => None,
         })
+    }
+}
+
+impl Deref for Style {
+    type Target = Option<InnerStyle>;
+
+    fn deref(&self) -> &Self::Target {
+        &self.0
     }
 }
 
@@ -211,6 +226,12 @@ impl<const N: usize> IntoPropValue<Style> for [(String, Option<String>); N] {
 impl<const N: usize> IntoPropValue<Style> for [(String, String); N] {
     fn into_prop_value(self) -> Style {
         self.into()
+    }
+}
+
+impl From<Style> for AttrValue {
+    fn from(value: Style) -> Self {
+        AttrValue::from(value.to_string())
     }
 }
 
