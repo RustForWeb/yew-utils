@@ -172,43 +172,50 @@ pub fn derive_struct_component(input: proc_macro::TokenStream) -> proc_macro::To
 
                         let first = path.path.segments.first();
 
-                        attributes.push(
-                            if first.is_some_and(|segment| segment.ident == "AttrValue") {
-                                quote! {
-                                    Some((
-                                        ::yew::virtual_dom::AttrValue::from(#name),
-                                        ::yew::virtual_dom::AttributeOrProperty::Attribute(self.#ident),
-                                    ))
-                                }
-                            } else if first.is_some_and(|segment| segment.ident == "Option" || segment.ident == "Style") {
-                                quote! {
-                                    self.#ident.map(|value| (
-                                        ::yew::virtual_dom::AttrValue::from(#name),
-                                        ::yew::virtual_dom::AttributeOrProperty::Attribute(
-                                            ::yew::virtual_dom::AttrValue::from(value)
-                                        ),
-                                    ))
-                                }
-                            } else if first.is_some_and(|segment| segment.ident == "bool") {
-                                quote! {
-                                    self.#ident.then_some((
-                                        ::yew::virtual_dom::AttrValue::from(#name),
-                                        ::yew::virtual_dom::AttributeOrProperty::Attribute(
-                                            ::yew::virtual_dom::AttrValue::from("")
-                                        ),
-                                    ))
-                                }
-                            } else {
-                                quote! {
-                                    Some((
-                                        ::yew::virtual_dom::AttrValue::from(#name),
-                                        ::yew::virtual_dom::AttributeOrProperty::Attribute(
-                                            ::yew::virtual_dom::AttrValue::from(self.#ident)
-                                        ),
-                                    ))
-                                }
-                            },
-                        );
+                        attributes.push(if first.is_some_and(|segment| segment.ident == "bool") {
+                            quote! {
+                                self.#ident.then_some((
+                                    ::yew::virtual_dom::AttrValue::from(#name),
+                                    ::yew::virtual_dom::AttributeOrProperty::Attribute(
+                                        ::yew::virtual_dom::AttrValue::from("")
+                                    ),
+                                ))
+                            }
+                        } else if first.is_some_and(|segment| segment.ident == "AttrValue") {
+                            quote! {
+                                Some((
+                                    ::yew::virtual_dom::AttrValue::from(#name),
+                                    ::yew::virtual_dom::AttributeOrProperty::Attribute(self.#ident),
+                                ))
+                            }
+                        } else if first.is_some_and(|segment| segment.ident == "Option") {
+                            quote! {
+                                self.#ident.map(|value| (
+                                    ::yew::virtual_dom::AttrValue::from(#name),
+                                    ::yew::virtual_dom::AttributeOrProperty::Attribute(
+                                        ::yew::virtual_dom::AttrValue::from(value)
+                                    ),
+                                ))
+                            }
+                        } else if first.is_some_and(|segment| segment.ident == "Style") {
+                            quote! {
+                                self.#ident.as_ref().map(|value| (
+                                    ::yew::virtual_dom::AttrValue::from(#name),
+                                    ::yew::virtual_dom::AttributeOrProperty::Attribute(
+                                        ::yew::virtual_dom::AttrValue::from(value)
+                                    ),
+                                ))
+                            }
+                        } else {
+                            quote! {
+                                Some((
+                                    ::yew::virtual_dom::AttrValue::from(#name),
+                                    ::yew::virtual_dom::AttributeOrProperty::Attribute(
+                                        ::yew::virtual_dom::AttrValue::from(self.#ident)
+                                    ),
+                                ))
+                            }
+                        });
                     }
                     _ => {
                         return syn::Error::new(field.ty.span(), "expected type path")
