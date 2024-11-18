@@ -253,6 +253,18 @@ impl From<Style> for AttrValue {
     }
 }
 
+impl IntoPropValue<Option<AttrValue>> for Style {
+    fn into_prop_value(self) -> Option<AttrValue> {
+        self.as_ref().map(|value| value.into())
+    }
+}
+
+impl IntoPropValue<AttrValue> for Style {
+    fn into_prop_value(self) -> AttrValue {
+        self.into()
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
