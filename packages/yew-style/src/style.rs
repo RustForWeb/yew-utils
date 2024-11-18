@@ -229,6 +229,12 @@ impl<const N: usize> IntoPropValue<Style> for [(String, String); N] {
     }
 }
 
+impl From<InnerStyle> for AttrValue {
+    fn from(value: InnerStyle) -> Self {
+        AttrValue::from(value.to_string())
+    }
+}
+
 impl From<Style> for AttrValue {
     fn from(value: Style) -> Self {
         AttrValue::from(value.to_string())
