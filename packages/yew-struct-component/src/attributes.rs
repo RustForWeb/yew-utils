@@ -4,7 +4,7 @@ use std::{
     option::{IntoIter, Iter, IterMut},
 };
 
-use yew::{html::IntoPropValue, AttrValue};
+use yew::{AttrValue, html::IntoPropValue};
 
 #[derive(Clone, Debug, Default, PartialEq)]
 pub struct Attributes(Option<HashMap<AttrValue, Option<AttrValue>>>);
