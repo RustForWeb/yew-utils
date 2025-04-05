@@ -4,7 +4,7 @@ use std::{
 };
 
 use indexmap::IndexMap;
-use yew::{html::IntoPropValue, AttrValue};
+use yew::{AttrValue, html::IntoPropValue};
 
 fn style_map_to_string(map: &IndexMap<String, Option<String>>) -> String {
     map.iter()

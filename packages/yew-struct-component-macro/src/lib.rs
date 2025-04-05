@@ -3,10 +3,10 @@
 extern crate proc_macro;
 
 use proc_macro2::TokenStream;
-use quote::{quote, ToTokens};
+use quote::{ToTokens, quote};
 use syn::{
-    parse_macro_input, spanned::Spanned, AttrStyle, Attribute, Data, DeriveInput, Ident, LitBool,
-    LitStr, Meta, Type,
+    AttrStyle, Attribute, Data, DeriveInput, Ident, LitBool, LitStr, Meta, Type, parse_macro_input,
+    spanned::Spanned,
 };
 
 #[derive(Debug, Default)]
@@ -220,20 +220,19 @@ pub fn derive_struct_component(input: proc_macro::TokenStream) -> proc_macro::To
                     _ => {
                         return syn::Error::new(field.ty.span(), "expected type path")
                             .to_compile_error()
-                            .into()
+                            .into();
                     }
                 }
             }
         }
 
-        let tag = if let Some(tag) =
-            tag.or_else(|| args.tag.map(|tag| tag.as_str().to_token_stream()))
-        {
-            tag
-        } else {
-            return syn::Error::new(derive_input.span(), "`#[struct_component(tag = \"\")] or #[struct_component(dynamic_tag = true)]` is required")
+        let tag = match tag.or_else(|| args.tag.map(|tag| tag.as_str().to_token_stream())) {
+            Some(tag) => tag,
+            None => {
+                return syn::Error::new(derive_input.span(), "`#[struct_component(tag = \"\")] or #[struct_component(dynamic_tag = true)]` is required")
                     .to_compile_error()
                     .into();
+            }
         };
 
         let arguments = if args.no_children.unwrap_or(false) {
