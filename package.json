@@ -1,7 +1,7 @@
 {
     "name": "@rustforweb/yew-utils",
     "description": "Utilities for Yew.",
-    "author": "Rust For Web <info@rustforweb.org>",
+    "author": "Rust for Web <info@rustforweb.org>",
     "repository": "github:RustForWeb/yew-utils",
     "license": "MIT",
     "private": true,
