@@ -137,14 +137,14 @@ pub fn derive_struct_component(input: proc_macro::TokenStream) -> proc_macro::To
                     continue;
                 }
 
-                if ident.to_string().starts_with("on") {
-                    if let Type::Path(path) = &field.ty {
-                        let first = path.path.segments.first();
-                        if first.is_some_and(|segment| segment.ident == "Callback") {
-                            listeners.push(ident.clone());
+                if ident.to_string().starts_with("on")
+                    && let Type::Path(path) = &field.ty
+                {
+                    let first = path.path.segments.first();
+                    if first.is_some_and(|segment| segment.ident == "Callback") {
+                        listeners.push(ident.clone());
 
-                            continue;
-                        }
+                        continue;
                     }
                 }
 
