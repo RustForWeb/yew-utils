@@ -12,4 +12,4 @@ TODO
 
 The yew-struct-component project is part of [Rust for Web](https://github.com/RustForWeb).
 
-[Rust for Web](https://github.com/RustForWeb) creates and ports web UI libraries for Rust. All projects are free and open source.
+[Rust for Web](https://github.com/RustForWeb) creates and ports web libraries for Rust. All projects are free and open source.
