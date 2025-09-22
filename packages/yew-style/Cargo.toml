@@ -11,3 +11,11 @@ version.workspace = true
 [dependencies]
 indexmap = "2.6.0"
 yew.workspace = true
+
+[dev-dependencies]
+tokio = { workspace = true, features = [
+    "macros",
+    "rt-multi-thread",
+    "test-util",
+] }
+yew = { workspace = true, features = ["ssr"] }

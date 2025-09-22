@@ -1,3 +1,4 @@
+use yew::ServerRenderer;
 use yew::prelude::*;
 use yew_style::Style;
 
@@ -47,4 +48,10 @@ fn App() -> Html {
             {"Click me"}
         </Button>
     }
+}
+
+#[tokio::test]
+async fn test() {
+    let renderer = ServerRenderer::<App>::new();
+    renderer.render().await;
 }
