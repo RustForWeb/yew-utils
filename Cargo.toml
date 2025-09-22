@@ -10,6 +10,7 @@ repository = "https://github.com/RustForWeb/yew-utils"
 version = "0.1.4"
 
 [workspace.dependencies]
+tokio = "1.47.1"
 yew = "0.21.0"
 
 [patch.crates-io]

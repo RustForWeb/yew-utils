@@ -11,3 +11,11 @@ version.workspace = true
 [dependencies]
 yew.workspace = true
 yew-struct-component-macro = { path = "../yew-struct-component-macro", version = "0.1.4" }
+
+[dev-dependencies]
+tokio = { workspace = true, features = [
+    "macros",
+    "rt-multi-thread",
+    "test-util",
+] }
+yew = { workspace = true, features = ["ssr"] }

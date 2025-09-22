@@ -1,6 +1,6 @@
 use std::fmt::{self, Display};
 
-use yew::prelude::*;
+use yew::{ServerRenderer, prelude::*};
 use yew_struct_component::{Attributes, StructComponent, struct_component};
 
 #[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
@@ -140,4 +140,10 @@ fn App() -> Html {
             />
         </Box>
     }
+}
+
+#[tokio::test]
+async fn test() {
+    let renderer = ServerRenderer::<App>::new();
+    renderer.render().await;
 }
