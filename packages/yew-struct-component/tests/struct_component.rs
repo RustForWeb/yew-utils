@@ -1,7 +1,7 @@
 use std::fmt::{self, Display};
 
 use yew::{ServerRenderer, prelude::*};
-use yew_struct_component::{Attributes, StructComponent, struct_component};
+use yew_struct_component::{Attributes, StructComponent};
 
 #[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
 enum BoxAs {
